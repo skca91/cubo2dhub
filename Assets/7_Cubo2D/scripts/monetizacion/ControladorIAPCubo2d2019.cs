@@ -156,12 +156,11 @@ public class ControladorIAPCubo2d2019 : MonoBehaviour, IStoreListener
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
-
+        Debug.Log(args);
 
         foreach(ItemIAPCubo2d2019 item in kProductIdConsumableList) { 
             if(String.Equals(args.purchasedProduct.definition.id, item.kProductId, StringComparison.Ordinal)) {
                 SendMessage("CompraCompletaConsumirIAP", item.value);
-                
             }
         }
 
