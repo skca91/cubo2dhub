@@ -30,7 +30,7 @@ public class barraProgresoUIConEfecto : MonoBehaviour {
 
 		//Debug.Log ("p anterior" + _progresoAnterior + " p actual " + _progresoActual);
 
-		progresoInterpolado = (_progresoActual - _progresoAnterior)/(30);
+		progresoInterpolado = (_progresoActual - _progresoAnterior)*0.033f;
 
 		///Debug.Log ("interpolo " + progresoInterpolado);
 		progresoActual = _progresoActual; 
@@ -40,7 +40,7 @@ public class barraProgresoUIConEfecto : MonoBehaviour {
 		}
 
 
-		InvokeRepeating ("actualizar",0,(duracion/30));
+		InvokeRepeating ("actualizar",0,(duracion*0.033f));
 	}
 
 

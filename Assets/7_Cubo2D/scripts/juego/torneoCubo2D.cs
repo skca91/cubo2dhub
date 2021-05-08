@@ -18,15 +18,21 @@ public class torneoCubo2D : MonoBehaviour {
 	public Dictionary<string, string> premios;
 	public int progresoActual = 0;
 	public int mejorResultado = 0;
+    float ContTiempoLigaActual;
 
 
-	public void Awake(){
+    public void Awake(){
 		premios = new Dictionary<string, string> ();
 		participantesTorneo = new List<string> ();
 	}
 
 	// Use this for initialization
 	void Start () {
+
+        ContTiempoLigaActual = PlayerPrefs.GetFloat("TextContadorTiempoJugadoTorneo", ContTiempoLigaActual);
+
+
+        InvokeRepeating("ActualizarDuracionTorneo", 0,1.0f);
 
 		/*nombre = "Super Torneo Definitivo Master";
 		nivelMinimo = 3;
@@ -57,7 +63,24 @@ public class torneoCubo2D : MonoBehaviour {
 		
 	}
 
-	public string toString(){
+    public string DuracionTorneoString() { 
+    
+        return System.TimeSpan.FromSeconds(ContTiempoLigaActual).ToString();
+    
+    }
+
+    public void ReiniciarContadorTiempo() {
+        ContTiempoLigaActual = 0;
+        PlayerPrefs.SetFloat("TextContadorTiempoJugadoTorneo", ContTiempoLigaActual);
+    }
+
+    public void ActualizarDuracionTorneo() {
+
+        ContTiempoLigaActual += 1;
+        PlayerPrefs.SetFloat("TextContadorTiempoJugadoTorneo", ContTiempoLigaActual);
+    }
+
+    public string toString(){
 		string _datos = "";
 		_datos += nombre+"+";
 		_datos += nivelMinimo.ToString()+"+";

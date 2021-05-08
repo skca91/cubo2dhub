@@ -16,8 +16,9 @@ public class simpleClick2D : MonoBehaviour {
 	public bool usarID = false;
 	public string id;
 	public modoMensaje modo = modoMensaje.hermano;
+    public float CooldDownBloqueo = 0;
 
-
+    bool activo = true;
 	// Use this for initialization
 	void Start () {
 		
@@ -28,11 +29,21 @@ public class simpleClick2D : MonoBehaviour {
 		
 	}
 
-	public void ninguno(){
+    public void ActivarBotonDespuesCoolDown() {
+        activo = true;
+    }
+
+    public void ninguno(){
 	
 	}
 
 	public void OnMouseDown(){
+
+        if (!activo)
+            return;
+
+        activo = false;
+        Invoke("ActivarBotonDespuesCoolDown", CooldDownBloqueo);
 		if (modo == modoMensaje.padre) {
 			if (usarID) {
 				SendMessageUpwards (metedo,id);
@@ -46,5 +57,16 @@ public class simpleClick2D : MonoBehaviour {
 				SendMessage (metedo);
 			}
 		}
-	}
+        else if (modo == modoMensaje.hijos)
+        {
+            if (usarID)
+            {
+                BroadcastMessage(metedo, id);
+            }
+            else
+            {
+                BroadcastMessage(metedo);
+            }
+        }
+    }
 }

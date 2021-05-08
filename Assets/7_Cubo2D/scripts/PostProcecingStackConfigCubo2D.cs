@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
-public class iconoSpamCubo2D : MonoBehaviour {
 
-	public Sprite v_iconoSprite;
+
+public class PostProcecingStackConfigCubo2D : MonoBehaviour {
+
+    public PostProcessingProfile PerfilActual;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,9 +16,5 @@ public class iconoSpamCubo2D : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-	}
-
-	public Sprite getIcono(){
-		return v_iconoSprite;
 	}
 }

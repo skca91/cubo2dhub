@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class tiendaConPestaniasCubo2D : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class tiendaConPestaniasCubo2D : MonoBehaviour {
 	public GameObject v_contenedorBotonesDeCompra;
 	public int dinero;
 	public int dineroEspecial;
+    public Text TituloPestaniaText;
 
 	/*requieren un controlador especifico que las inicialice*/
 	private Dictionary<string, contenedorDeObjetos> v_todosLosObjetos;
@@ -36,8 +38,11 @@ public class tiendaConPestaniasCubo2D : MonoBehaviour {
 		
 
 	public void mostrarPestania(string _id){
+        if(TituloPestaniaText!=null)
+            TituloPestaniaText.text = idiomaV2.textoTraducido(_id);
 
-		SendMessage ("actualizarDatosPestanias");
+
+        SendMessage ("actualizarDatosPestanias");
 
 		if (v_listaDePestaniasConIds [_id] != null) {
 			pestaniaActual = _id;
@@ -53,7 +58,7 @@ public class tiendaConPestaniasCubo2D : MonoBehaviour {
 					
 				bciv1.configurarBoton (
 					idBoton,
-					/*Nombre*/v_listaDeDatos[idBoton.ToString()][0],
+					/*Nombre*/ v_listaDeDatos[idBoton.ToString()][0],
 					v_todosLosObjetos [_id].buscarIconoPorID (idBoton),
 					/*costo*/v_listaDeDatos[idBoton.ToString()][1],
 					/*nivel*/v_listaDeDatos[idBoton.ToString()][3],
@@ -72,7 +77,7 @@ public class tiendaConPestaniasCubo2D : MonoBehaviour {
 //		Debug.Log ("trato de comprar mejorar " + _id +"dinero "+ dinero + "costo " +v_listaDeDatos [_id] [1] );
 		
 		int costo = (int) float.Parse (v_listaDeDatos [_id] [1]);
-		if (dinero > costo) {
+		if (dinero >= costo) {
 			v_duenio.SendMessage ("agregarDinero", -costo);//se envia directo al inventario
 		//	Debug.Log ("agrego dinero "+ (-costo));
 			v_duenio.SendMessage ("comprarMejorar", _id);

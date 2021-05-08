@@ -58,14 +58,14 @@ public class botonComprarYMejorarItemV1 : MonoBehaviour {
 
 	public void configurarBoton(string _id,string _nombre, Sprite _icono , string _costo1, string _nivel, string _requerimientoOInfo, string _frecuenciaUpgrade, bool _bloqueado, bool _disponibleParaComprar){
 
-		Debug.Log ("boton " +_id + " " +_disponibleParaComprar);
+		//Debug.Log ("boton " +_id + " " +_disponibleParaComprar);
 
 		v_id = _id;
 		v_icono.sprite = _icono;
-		v_textNombre.text = _nombre;
+		v_textNombre.text = idiomaV2.textoTraducidoTitulo( _nombre);
 		v_textCostoMejora.text = _costo1 ;
 		v_nivelMejoraActual = int.Parse( _nivel);
-		v_textNivelMejoraActual.text = "Nivel "+v_nivelMejoraActual+".";
+		v_textNivelMejoraActual.text = idiomaV2.textoTraducidoTitulo("Nivel") + " "+v_nivelMejoraActual+".";
 		v_textRequerimientosOInfoMejora.text = _requerimientoOInfo;
 		//v_nivelMejoraMaximo = int.Parse(_mejoraMaxima);
 		v_frecuenciaUpgrade = calcularUpgrades(_frecuenciaUpgrade);

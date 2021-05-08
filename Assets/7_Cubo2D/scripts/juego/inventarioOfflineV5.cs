@@ -28,7 +28,7 @@ public class inventarioOfflineV5 : MonoBehaviour {
 	void Update () {
 
 	}
-	/**Se puede agregar nuemeros negativos*/
+	/**Se puede agregar numeros negativos*/
 	public void agregarDinero(int _dineroExtra){
 		v_dinero += _dineroExtra;
 //		Debug.Log ("guardo " + toStringDatos());
@@ -40,11 +40,26 @@ public class inventarioOfflineV5 : MonoBehaviour {
 		return v_dinero;
 	}
 
-	public void agregarItem(string _id,int _cantidadUnidades){
+    /**Se puede agregar numeros negativos*/
+    public void agregarDineroEspecial(int _dineroExtra)
+    {
+        v_dineroEspecial += _dineroExtra;
+        //      Debug.Log ("guardo " + toStringDatos());
+        guardar();
+        SendMessage("actualizarInterfaz");
+    }
+
+    public int getDineroEspecial()
+    {
+        return v_dineroEspecial;
+    }
+
+    public void agregarItem(string _id,int _cantidadUnidades){
 		if (!v_itemInventario.ContainsKey (_id)) {
 			v_itemInventario.Add (_id, _cantidadUnidades);
 		}
-	}
+        guardar();
+    }
 
 	public void agregarItem(string _id){
 		if (!v_itemInventario.ContainsKey (_id)) {
@@ -52,11 +67,15 @@ public class inventarioOfflineV5 : MonoBehaviour {
 		} else {
 			v_itemInventario [_id]++;
 		}
-	}
+        guardar();
+    }
 	/**-1 no encontrada*/
-	public int getCantidadItem(string _id){
-		if (v_itemInventario.ContainsKey (_id)) {
-			return v_itemInventario[_id];
+	public int getCantidadItem(string _id)
+    {
+        Debug.Log("getCantidadItem " + _id);
+        if (v_itemInventario.ContainsKey (_id)) {
+            Debug.Log("Cantida: "+ v_itemInventario[_id]);
+            return v_itemInventario[_id];
 		}
 		return -1;
 	}
@@ -107,7 +126,7 @@ public class inventarioOfflineV5 : MonoBehaviour {
 		} else {
 			PlayerPrefs.SetString ("inventarioOfflineV5" + idVersionJuego, toStringDatos ());
 		}
-		Debug.Log (" inventario guarda " + toStringDatos ());
+//		Debug.Log (" inventario guarda " + toStringDatos ());
 	}
 
 	public void cargar(){
@@ -117,7 +136,7 @@ public class inventarioOfflineV5 : MonoBehaviour {
 			fromStringDatos( PlayerPrefs.GetString ("inventarioOfflineV5" + idVersionJuego, toStringDatos ()));
 		}
 
-		Debug.Log (" inventario carga " + toStringDatos ());
+//		Debug.Log (" inventario carga " + toStringDatos ());
 		SendMessage ("inventarioOfflineV5Cargado");
 	}
 

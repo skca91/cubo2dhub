@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class iconoSpamCubo2D : MonoBehaviour {
+public class googlePlayGameServicesCubo2dV2 : MonoBehaviour {
 
-	public Sprite v_iconoSprite;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,9 +12,5 @@ public class iconoSpamCubo2D : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-	}
-
-	public Sprite getIcono(){
-		return v_iconoSprite;
 	}
 }
