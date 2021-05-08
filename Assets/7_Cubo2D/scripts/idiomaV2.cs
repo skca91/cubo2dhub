@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.IO;
+using System;
 
 public class idiomaV2 : MonoBehaviour {
 
@@ -76,5 +77,18 @@ public class idiomaV2 : MonoBehaviour {
 		}
 
 		return "["+idiomaActual+"]"+textoId+"";
+	}
+
+	public static string textoTraducidoTitulo(string nombre)
+    {
+		var traducido = textoTraducido(nombre);
+		var ArrayChar = traducido.ToCharArray();
+
+		if (ArrayChar.Length > 0) {
+			var traducidoMayusculas = traducido.ToUpper().ToCharArray();
+			ArrayChar[0] = traducidoMayusculas[0];
+		}
+
+		return new string(ArrayChar);
 	}
 }
