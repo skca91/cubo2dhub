@@ -105,7 +105,7 @@ public class inventarioOfflineV5 : MonoBehaviour {
 		if (idVersionJuego.Equals ("")) {
 			Debug.Log ("se recomienda usar un identificador de inventario para el juego");
 		} else {
-            PlayerPrefs.SetString ("inventarioOfflineV5" + idVersionJuego, toStringDatos ());
+			PlayerPrefs.SetString ("inventarioOfflineV5" + idVersionJuego, toStringDatos ());
 		}
 		Debug.Log (" inventario guarda " + toStringDatos ());
 	}
@@ -114,7 +114,7 @@ public class inventarioOfflineV5 : MonoBehaviour {
 		if (idVersionJuego.Equals ("")) {
 			Debug.Log ("se recomienda usar un identificador de inventario para el juego");
 		} else {
-			fromStringDatos(PlayerPrefs.GetString ("inventarioOfflineV5" + idVersionJuego, toStringDatos ()));
+			fromStringDatos( PlayerPrefs.GetString ("inventarioOfflineV5" + idVersionJuego, toStringDatos ()));
 		}
 
 		Debug.Log (" inventario carga " + toStringDatos ());

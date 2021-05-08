@@ -67,7 +67,7 @@ public class juegoConEnergia : MonoBehaviour {
 		if (idVersionJuego.Equals ("")) {
 			Debug.Log ("se recomienda usar un identificador de juego con energia "+idEnergia.ToUpper()+" para el juego");
 		} else {
-            PlayerPrefs.SetString ("juegoEnergia" + idVersionJuego+idEnergia, toStringDatos ());
+			PlayerPrefs.SetString ("juegoEnergia" + idVersionJuego+idEnergia, toStringDatos ());
 		}
 
 		//Debug.Log ("guarda energia " +toStringDatos());
@@ -78,7 +78,7 @@ public class juegoConEnergia : MonoBehaviour {
 		if (idVersionJuego.Equals ("")) {
 			Debug.Log ("se recomienda usar un identificador de juego con energia "+idEnergia.ToUpper()+" para el juego");
 		} else {
-			fromStringDatos(PlayerPrefs.GetString ("juegoEnergia" + idVersionJuego+idEnergia, toStringDatos ()));
+			fromStringDatos( PlayerPrefs.GetString ("juegoEnergia" + idVersionJuego+idEnergia, toStringDatos ()));
 		}
 
 		if ((recarga - System.DateTime.UtcNow ).TotalSeconds <= 0) {

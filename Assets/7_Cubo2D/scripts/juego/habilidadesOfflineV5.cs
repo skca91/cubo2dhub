@@ -81,7 +81,7 @@ public class habilidadesOfflineV5 : MonoBehaviour {
 		if (idVersionJuego.Equals ("")) {
 			Debug.Log ("se recomienda usar un identificador de habilidades para el juego");
 		} else {
-            PlayerPrefs.SetString ("habilidadesOfflineV5" + idVersionJuego, toStringDatos ());
+			PlayerPrefs.SetString ("habilidadesOfflineV5" + idVersionJuego, toStringDatos ());
 		}
 		Debug.Log ("guardo habilidadesOfflineV5"+idVersionJuego);
 	}
@@ -90,7 +90,7 @@ public class habilidadesOfflineV5 : MonoBehaviour {
 		if (idVersionJuego.Equals ("")) {
 			Debug.Log ("se recomienda usar un identificador de habilidades para el juego");
 		} else {
-			fromStringDatos(PlayerPrefs.GetString ("habilidadesOfflineV5" + idVersionJuego, toStringDatos ()));
+			fromStringDatos( PlayerPrefs.GetString ("habilidadesOfflineV5" + idVersionJuego, toStringDatos ()));
 		}
 		if(cargarOnStart){
 			SendMessage ("actualizarHabilidades");

@@ -7,8 +7,6 @@ public class ShowMenuOnBackButton : MonoBehaviour
    
     [SerializeField]
     menu BackMenu;
-    [SerializeField]
-    GameObject BackMenuV2;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +17,6 @@ public class ShowMenuOnBackButton : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (BackMenuV2 != null)
-                BackMenuV2.SetActive(true);
-            if(BackMenu!=null)
                 BackMenu.showMenu();
         }
     }

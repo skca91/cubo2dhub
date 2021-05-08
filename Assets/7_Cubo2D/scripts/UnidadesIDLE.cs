@@ -2,28 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnidadesIDLE {
+public class unidadesIDLE {
 
 	public double v_base = 0f;
 	public int v_exponente = 0;
 
 
-	public UnidadesIDLE(): this (0f,0){ }
+	public unidadesIDLE(): this (0f,0){ }
 
-	public UnidadesIDLE(double v_base, int v_exponente){
+	public unidadesIDLE(double v_base, int v_exponente){
 		this.v_base = v_base;
 		this.v_exponente = v_exponente;
 	
 	}
 
-	public void setUnidad( UnidadesIDLE _unidad){
+	public void setUnidad( unidadesIDLE _unidad){
 		v_base = _unidad.v_base;
 		v_exponente = _unidad.v_exponente;
 
 		//this = unidadesIDLE.calcularNotacion (this);
 	}
 
-	public static UnidadesIDLE calcularNotacion(UnidadesIDLE _unidad){
+	public static unidadesIDLE calcularNotacion(unidadesIDLE _unidad){
 		/**Este calculo no va aqui*/
 		if (_unidad.v_base > 99999) {
 			_unidad.v_base = _unidad.v_base / 1000;
@@ -41,7 +41,7 @@ public class UnidadesIDLE {
 	}
 
 	/**Primero es mayor #return > 0, igual #return = 0, Primero es menor #return < 0*/
-	public static int comparar(UnidadesIDLE _unidad1,UnidadesIDLE _unidad2){
+	public static int comparar(unidadesIDLE _unidad1,unidadesIDLE _unidad2){
 		if (_unidad1.v_exponente > _unidad2.v_exponente) {
 			return 1;
 		} else if (_unidad1.v_exponente < _unidad2.v_exponente) {
@@ -68,17 +68,9 @@ public class UnidadesIDLE {
 
 		return valorReal;
 	}
-    public override bool Equals(object obj)
-    {
-		var otraUnidad = (UnidadesIDLE)obj;
-		if (otraUnidad != null) {
-			return this.v_base == otraUnidad.v_base && this.v_exponente == otraUnidad.v_exponente;
-		}
-        return false;
-    }
 
-    public static UnidadesIDLE operator +(UnidadesIDLE _unidad1,UnidadesIDLE _unidad2){
-		UnidadesIDLE resultado = new UnidadesIDLE(), unidadMayor = _unidad1, unidadMenor = _unidad2;
+	public static unidadesIDLE operator +(unidadesIDLE _unidad1,unidadesIDLE _unidad2){
+		unidadesIDLE resultado = new unidadesIDLE(), unidadMayor = _unidad1, unidadMenor = _unidad2;
 
 
 		if(_unidad1 > _unidad2){
@@ -107,11 +99,11 @@ public class UnidadesIDLE {
 
 
 	/** este metodo no resulta numeros negativos */
-	public static UnidadesIDLE operator -(UnidadesIDLE _unidad1,UnidadesIDLE _unidad2){
-		UnidadesIDLE resultado = new UnidadesIDLE();
+	public static unidadesIDLE operator -(unidadesIDLE _unidad1,unidadesIDLE _unidad2){
+		unidadesIDLE resultado = new unidadesIDLE();
 
 		if (_unidad1 < _unidad2)
-			return new UnidadesIDLE (0f, 0);
+			return new unidadesIDLE (0f, 0);
 
 
 		if (_unidad1 > _unidad2) {
@@ -127,9 +119,9 @@ public class UnidadesIDLE {
 		return calcularNotacion(resultado);
 	}
 
-	public static UnidadesIDLE operator *(UnidadesIDLE _unidad1,UnidadesIDLE _unidad2){
+	public static unidadesIDLE operator *(unidadesIDLE _unidad1,unidadesIDLE _unidad2){
 		
-		UnidadesIDLE resultado = new UnidadesIDLE();
+		unidadesIDLE resultado = new unidadesIDLE();
 
 		resultado.v_base = _unidad1.v_base * _unidad2.v_base;
 		resultado.v_exponente = _unidad1.v_exponente + _unidad2.v_exponente;
@@ -139,16 +131,16 @@ public class UnidadesIDLE {
 		return _unidad1;
 	}
 
-	public static UnidadesIDLE operator /(UnidadesIDLE _unidad1,UnidadesIDLE _unidad2){
+	public static unidadesIDLE operator /(unidadesIDLE _unidad1,unidadesIDLE _unidad2){
 
 		if (_unidad1.v_exponente - _unidad2.v_exponente < 0) {
 			float proporcion  = (float)((_unidad1.v_base * Mathf.Pow (1000, _unidad1.v_exponente - _unidad2.v_exponente)) / _unidad2.v_base);
 
-			return new UnidadesIDLE (proporcion, 0);
+			return new unidadesIDLE (proporcion, 0);
 		}
 			
 
-		UnidadesIDLE resultado = new UnidadesIDLE();
+		unidadesIDLE resultado = new unidadesIDLE();
 
 
 
@@ -161,7 +153,7 @@ public class UnidadesIDLE {
 		//return new unidadesIDLE (_unidad1.v_base / _unidad2.v_base, _unidad1.v_exponente - _unidad2.v_exponente);
 	}
 
-	public static bool operator >(UnidadesIDLE _unidad1,UnidadesIDLE _unidad2){
+	public static bool operator >(unidadesIDLE _unidad1,unidadesIDLE _unidad2){
 		if (_unidad1.v_exponente > _unidad2.v_exponente) {
 			return true;
 		} else if ( _unidad1.v_exponente == _unidad2.v_exponente && _unidad1.v_base > _unidad2.v_base) {
@@ -174,11 +166,11 @@ public class UnidadesIDLE {
 		return v_base > 0f;
 	}
 
-	public static bool esNull(UnidadesIDLE _unidad1){
+	public static bool esNull(unidadesIDLE _unidad1){
 		return _unidad1 == null;
 	}
 
-	public static bool operator <(UnidadesIDLE _unidad1,UnidadesIDLE _unidad2){
+	public static bool operator <(unidadesIDLE _unidad1,unidadesIDLE _unidad2){
 		if (_unidad1.v_exponente < _unidad2.v_exponente) {
 			return true;
 		} else if ( _unidad1.v_exponente == _unidad2.v_exponente && _unidad1.v_base < _unidad2.v_base) {
@@ -187,7 +179,7 @@ public class UnidadesIDLE {
 		return false;
 	}
 
-	public static bool operator ==(UnidadesIDLE _unidad1,UnidadesIDLE _unidad2){
+	public static bool operator ==(unidadesIDLE _unidad1,unidadesIDLE _unidad2){
 		if(_unidad1.v_exponente == _unidad2.v_exponente && _unidad1.v_base == _unidad2.v_base )
 			return true;
 
@@ -195,7 +187,7 @@ public class UnidadesIDLE {
 	}
 
 
-	public static bool operator !=(UnidadesIDLE _unidad1,UnidadesIDLE _unidad2){
+	public static bool operator !=(unidadesIDLE _unidad1,unidadesIDLE _unidad2){
 		if( ! (_unidad1 == _unidad2) )
 			return true;
 
@@ -212,13 +204,13 @@ public class UnidadesIDLE {
 	
 		
 
-	public static string toStringText(UnidadesIDLE _unidad){
+	public static string toStringText(unidadesIDLE _unidad){
 		return _unidad.v_base + "-" + _unidad.v_exponente;
 	}
 
-	public static UnidadesIDLE fromStringText(string _text){
+	public static unidadesIDLE fromStringText(string _text){
 		
-		UnidadesIDLE _unidad = new UnidadesIDLE();
+		unidadesIDLE _unidad = new unidadesIDLE();
 		string[] split = _text.Split ('-');
 		_unidad.v_base = double.Parse( split [0]);
 		_unidad.v_exponente = int.Parse(split [1]);

@@ -44,8 +44,7 @@ public class ControladorIAPCubo2d2019 : MonoBehaviour, IStoreListener
         // Create a builder, first passing in a suite of Unity provided stores.
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
-
-        foreach(ItemIAPCubo2d2019 item in kProductIdConsumableList) {
+        foreach (ItemIAPCubo2d2019 item in kProductIdConsumableList) {
             builder.AddProduct(item.kProductId, ProductType.Consumable);
         }
 
@@ -156,11 +155,12 @@ public class ControladorIAPCubo2d2019 : MonoBehaviour, IStoreListener
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
-        Debug.Log(args);
+
 
         foreach(ItemIAPCubo2d2019 item in kProductIdConsumableList) { 
             if(String.Equals(args.purchasedProduct.definition.id, item.kProductId, StringComparison.Ordinal)) {
                 SendMessage("CompraCompletaConsumirIAP", item.value);
+                
             }
         }
 
