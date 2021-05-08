@@ -8,7 +8,7 @@ Assets/UnityAds*
 Assets/Resources*
 Assets/Plugins*
 Assets/RestClient*
-Assets/Editor*
+Assets/Editor/Resources*
 
 # Visual Studio cache directory
 .vs/
