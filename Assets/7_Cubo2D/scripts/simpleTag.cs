@@ -1,13 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PostProcessing;
 
+public class simpleTag : MonoBehaviour {
 
-
-public class PostProcecingStackConfigCubo2D : MonoBehaviour {
-
-    public PostProcessingProfile PerfilActual;
+	public string tagScript;
 	// Use this for initialization
 	void Start () {
 		
