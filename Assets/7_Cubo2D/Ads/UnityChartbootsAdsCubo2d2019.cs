@@ -26,7 +26,7 @@ public class UnityChartbootsAdsCubo2d2019 : MonoBehaviour ,IUnityAdsListener
     bool Debug = false;
     [SerializeField]
     bool TestMode = false;
-    public static string video = "video";
+    public static readonly string video = "video";
     // Start is called before the first frame update
     void Start()
     {

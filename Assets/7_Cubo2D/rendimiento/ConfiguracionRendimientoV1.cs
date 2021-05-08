@@ -46,7 +46,7 @@ public class ConfiguracionRendimientoV1 : MonoBehaviour
     public void MaxFPS() {
         Application.targetFrameRate = 60;
         CancelInvoke("MinFPS");
-        Invoke("MinFPS", 5);
+        Invoke("MinFPS", 2);
     //   Debug.Log("MaxFPS");
     }
 }

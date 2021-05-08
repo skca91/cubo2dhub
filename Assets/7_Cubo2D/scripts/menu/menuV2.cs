@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class menuV2 : MonoBehaviour
 {
+    bool Open = false;
     [SerializeField]
     bool noMoverAlInicio;
     [SerializeField]

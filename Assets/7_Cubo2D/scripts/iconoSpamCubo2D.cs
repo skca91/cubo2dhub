@@ -5,6 +5,8 @@ using UnityEngine;
 public class iconoSpamCubo2D : MonoBehaviour {
 
 	public Sprite v_iconoSprite;
+	public Material v_iconoMaterial;
+	public string id;
 	// Use this for initialization
 	void Start () {
 		

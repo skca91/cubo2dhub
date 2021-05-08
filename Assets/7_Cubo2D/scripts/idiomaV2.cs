@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.IO;
-using System;
 
 public class idiomaV2 : MonoBehaviour {
 
@@ -61,10 +60,11 @@ public class idiomaV2 : MonoBehaviour {
 
 	public static string textoTraducido(string textoId){
 
-		//Idioma
+        //Idioma
 
+        //Debug.Log("idioma " + idiomaActual + " tecto " + textoId);
 
-		foreach (XmlNode nodoActualXML in listaPalabrasEnXML) {
+        foreach (XmlNode nodoActualXML in listaPalabrasEnXML) {
 
 			XmlNodeList listaTexto = nodoActualXML.ChildNodes;
 
@@ -77,18 +77,5 @@ public class idiomaV2 : MonoBehaviour {
 		}
 
 		return "["+idiomaActual+"]"+textoId+"";
-	}
-
-	public static string textoTraducidoTitulo(string nombre)
-    {
-		var traducido = textoTraducido(nombre);
-		var ArrayChar = traducido.ToCharArray();
-
-		if (ArrayChar.Length > 0) {
-			var traducidoMayusculas = traducido.ToUpper().ToCharArray();
-			ArrayChar[0] = traducidoMayusculas[0];
-		}
-
-		return new string(ArrayChar);
 	}
 }

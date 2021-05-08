@@ -58,7 +58,7 @@ public class manejadorAudioMixer : MonoBehaviour {
 	public void actualizarAudioMixer(){
 		//v_audioMixer.
 //		Debug.Log("volumen " + v_volumen + " modo " + v_modo);
-		
+
 
 		v_audioMixer.SetFloat("volumenMaster",((v_volumen*50)-40));
 		//Audio
@@ -80,10 +80,6 @@ public class manejadorAudioMixer : MonoBehaviour {
 	}
 
 	public void volumenCheckValue(float _value){
-		if (v_estado == estadoAudioMixer.juegoNormal)
-		{
-		}
-
 		v_volumen = _value;
 		//v_volumen = v_SliderVolumen.value;
 		actualizarAudioMixer ();

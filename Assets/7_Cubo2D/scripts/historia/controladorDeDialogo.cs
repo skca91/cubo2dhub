@@ -18,7 +18,6 @@ public class controladorDeDialogo : MonoBehaviour {
 
 	public bool dialogoVisible = false;
 	public Text dialogo;
-    public string NombreJugador = "Player";
 	// Use this for initialization
 	void Start () {
 		TextoActual = 0;
@@ -84,10 +83,8 @@ public class controladorDeDialogo : MonoBehaviour {
 		foreach(TextoXML t in nodoXMLAcual.textos){
 			//Debug.Log ("texto dialogo: "+ t.dialogo);
 			if(conTexto == TextoActual){
-                //idiomaV2.textoTraducido (t.dialogo);
-                string NombrePersonaje = t.personaje.Equals("nombrejugador") ? NombrePersonaje = "<color=#0010FF>" + NombreJugador + ":</color> " : "<color=#FFFF00>" + idiomaV2.textoTraducido(t.personaje).ToUpper()+ ":</color> ";
-
-                dialogo.text = NombrePersonaje + idiomaV2.textoTraducido( t.dialogo);
+				//idiomaV2.textoTraducido (t.dialogo);
+				dialogo.text = "<color=#FFFF00>"+t.personaje.ToUpperInvariant()+":</color> "+t.dialogo;
 				personaje.cargarPersonaje (t.personaje,t.expresion);
 				//BroadcastMessage ("actualizarTexto");
 				//Debug.Log ("Hola ?? ");
@@ -172,7 +169,7 @@ public class controladorDeDialogo : MonoBehaviour {
 			proximoTexto ();
 		} else {
 			nodoAcutal = nuevoNodo;
-			Debug.Log ("nuevo nodo es valido: " +nuevoNodo );
+			Debug.Log ("nuevo nodo es valido " +nuevoNodo );
 			/*Este metodo se debe implementar en el juego*/
 			juego.SendMessage("actualizarNodoDeHistoria");
 			if (dialogoVisible) {

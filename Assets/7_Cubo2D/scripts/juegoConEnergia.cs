@@ -9,7 +9,6 @@ public class juegoConEnergia : MonoBehaviour {
 	public float tiempoRecargaEnSegundos;
 	public float limiteDeEnergia;
 	public UnityEngine.UI.Text textoEspera;
-	public UnityEngine.UI.Text textoContadorEnergiaActual;
 
 
 	int energiaActual;
@@ -45,16 +44,11 @@ public class juegoConEnergia : MonoBehaviour {
 					textoEspera.text = System.TimeSpan.FromSeconds ((int)esperaParaRecargaEnSegundos).ToString();
 				}
 			}
-
-            if (textoContadorEnergiaActual != null)
-            {
-                textoContadorEnergiaActual.text = energiaActual.ToString();
-            }
-        } else {
+		} else {
 			CancelInvoke ("calcularEnergia");
 		}
+		
 	}
-	/**Suma energia extra, tambien valida el limite maximo*/
 	public void setEnergia(int _energiaExtra){
 		Debug.Log ("set energia " + energiaActual + " nueva " +_energiaExtra);
 		energiaActual += _energiaExtra;
@@ -66,16 +60,14 @@ public class juegoConEnergia : MonoBehaviour {
 
 	/*Se Implementa en los hermanos*/
 	public void recargaEnergiaCompleta(){
-		if (textoContadorEnergiaActual != null) {
-			textoContadorEnergiaActual.text = energiaActual.ToString ();
-		}
+	
 	}
 
 	public void guardar(){
 		if (idVersionJuego.Equals ("")) {
 			Debug.Log ("se recomienda usar un identificador de juego con energia "+idEnergia.ToUpper()+" para el juego");
 		} else {
-			PlayerPrefs.SetString ("juegoEnergia" + idVersionJuego+idEnergia, toStringDatos ());
+            PlayerPrefs.SetString ("juegoEnergia" + idVersionJuego+idEnergia, toStringDatos ());
 		}
 
 		//Debug.Log ("guarda energia " +toStringDatos());
@@ -86,7 +78,7 @@ public class juegoConEnergia : MonoBehaviour {
 		if (idVersionJuego.Equals ("")) {
 			Debug.Log ("se recomienda usar un identificador de juego con energia "+idEnergia.ToUpper()+" para el juego");
 		} else {
-			fromStringDatos( PlayerPrefs.GetString ("juegoEnergia" + idVersionJuego+idEnergia, toStringDatos ()));
+			fromStringDatos(PlayerPrefs.GetString ("juegoEnergia" + idVersionJuego+idEnergia, toStringDatos ()));
 		}
 
 		if ((recarga - System.DateTime.UtcNow ).TotalSeconds <= 0) {
@@ -99,39 +91,27 @@ public class juegoConEnergia : MonoBehaviour {
 
 			SendMessage ("recargaEnergiaCompleta");
 			recarga =System.DateTime.UtcNow.AddSeconds(tiempoRecargaEnSegundos);
-        }
-        else {
-            if (!IsInvoking("calcularEnergia"))
-            {
-                recarga = System.DateTime.UtcNow.AddSeconds(tiempoRecargaEnSegundos);
-                InvokeRepeating("calcularEnergia", 1, 1);
-            }
-        }
+		}
 
-        if (textoContadorEnergiaActual != null)
-        {
-            textoContadorEnergiaActual.text = energiaActual.ToString();
-        }
 
-    }
+	}
 
 	public string toStringDatos(){
 		string _datos = "";
 		_datos += energiaActual.ToString ()+";";
 		_datos += recarga.ToString ();
 
-		Debug.Log ("to " +_datos);
+		//Debug.Log ("to " +_datos);
 		return _datos;
 	}
 
 	public void fromStringDatos(string _datos){
 
-		Debug.Log (idEnergia+" from " +_datos);
+		//Debug.Log ("from " +_datos);
 
 		string[] datosString = _datos.Split (';');
 		int.TryParse (datosString [0], out energiaActual);
 		System.DateTime.TryParse (datosString [1],out recarga);
-        Debug.Log("energia actual "+ energiaActual);
 	}
 
 	public void consumirEnergiaDev(){
@@ -153,11 +133,8 @@ public class juegoConEnergia : MonoBehaviour {
 				InvokeRepeating ("calcularEnergia", 1, 1);
 			}
 			guardar ();
-            if (textoContadorEnergiaActual != null)
-            {
-                textoContadorEnergiaActual.text = energiaActual.ToString();
-            }
-            return true;
+			//Debug.Log ("recarga: "+recarga.ToString());
+			return true;
 		} else {
 			return false;
 		}

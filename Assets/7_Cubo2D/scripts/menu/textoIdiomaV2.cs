@@ -2,13 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Globalization;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
-
-[ExecuteInEditMode]
 public class textoIdiomaV2 : MonoBehaviour {
 
 	public enum modoMuestraTexto{sinCambios,todoMayusculas,primeraLetraMayuscula}
@@ -25,53 +19,17 @@ public class textoIdiomaV2 : MonoBehaviour {
 
 		texto = GetComponent<Text> ();
 		textoInChildren = GetComponentsInChildren<Text> ();
-		//actualizarTexto ();
-
-        if (Application.isPlaying)
-        {
-            actualizarTexto();
-        }
-        else
-        {
-            //tipoTexto = texto.text;
-            tipoTexto = tipoTexto.Replace("{", "");
-            tipoTexto = tipoTexto.Replace("}", "");
-            InvokeRepeating("actualizarTextoEditor", 0.1f, 0.5f);
-        }
-    }
+		actualizarTexto ();
+	}
 
 	// Update is called once per frame
 	void Update () {
-#if UNITY_EDITOR
-        if (Application.isPlaying)
-        {
-            if (actualizarEnTiempoReal)
-            {
-                actualizarTexto();
-            }
-        }
-        else {
-           // texto.text = "{"+tipoTexto+"}";
-        }
-       
-#else
-
-        if (actualizarEnTiempoReal) {
+		if (actualizarEnTiempoReal) {
 			actualizarTexto ();
 		}
-#endif
+	}
 
-    }
-
-    public void actualizarTextoEditor()
-    {
-
-        texto.text = "{" + tipoTexto + "}";
-    }
-
-
-
-    public void actualizarTexto(){
+	public void actualizarTexto(){
 
 		if (texto == null)
 			return;
@@ -84,9 +42,8 @@ public class textoIdiomaV2 : MonoBehaviour {
 			}else if(modoTexto.Equals (modoMuestraTexto.todoMayusculas)){
 				texto.text = idiomaV2.textoTraducido (tipoTexto).ToUpper();
 			}else if(modoTexto.Equals (modoMuestraTexto.primeraLetraMayuscula)){
-				texto.text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(idiomaV2.textoTraducido(tipoTexto));
-            }
-            else{
+				texto.text = idiomaV2.textoTraducido (tipoTexto);
+			}else{
 				texto.text = idiomaV2.textoTraducido (tipoTexto);
 			}
 
