@@ -4,7 +4,11 @@
 [Bb]uild/
 [Bb]uilds/
 Assets/AssetStoreTools*
+Assets/UnityAds*
+Assets/Resources*
+Assets/Plugins*
 Assets/RestClient*
+Assets/Editor*
 
 # Visual Studio cache directory
 .vs/
