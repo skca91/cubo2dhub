@@ -6,7 +6,7 @@ using System.Collections;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CanvasGroup))]
 
-public class menu : MonoBehaviour {
+public class menu : MonoBehaviour , IMenuControlador,IMenuRespuesta{
 
 	private Animator animator;
 	private CanvasGroup canvasGrup;
@@ -88,4 +88,18 @@ public class menu : MonoBehaviour {
 	public void hide(){
 		//avisa a los hermanos
 	}
+}
+
+public interface IMenuControlador {
+	void showMenu();
+	void hideMenu();
+	void actualizarTexto();
+}
+
+public interface IMenuRespuesta
+{
+	//se ejecuta despues que un menu se muestra
+	void show();
+	//se ejecuta despues que un menu se oculta
+	void hide();
 }
