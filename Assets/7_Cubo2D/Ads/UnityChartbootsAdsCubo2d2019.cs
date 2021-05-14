@@ -49,7 +49,7 @@ public class UnityChartbootsAdsCubo2d2019 : MonoBehaviour ,IUnityAdsListener
 
         contAds = 0;
         //Chartboost.setAutoCacheAds(true);
-        CanvasGroupButton = VideoRecompensaButton.GetComponent<CanvasGroup>();
+        CanvasGroupButton = VideoRecompensaButton?.GetComponent<CanvasGroup>();
         if(VideoRecompensaButton2!=null)
             CanvasGroupButton2 = VideoRecompensaButton2.GetComponent<CanvasGroup>();
         InvokeRepeating("UpdateVideoRecompensaButton", 0,0.5f);
@@ -158,7 +158,10 @@ public class UnityChartbootsAdsCubo2d2019 : MonoBehaviour ,IUnityAdsListener
 
     private void UpdateVideoRecompensaButton()
     {
-        if (Advertisement.IsReady("rewardedVideo"))
+        if (VideoRecompensaButton == null)
+            return;
+
+        if ( Advertisement.IsReady("rewardedVideo"))
         {
             VideoRecompensaButton.interactable = true;
             if (CanvasGroupButton != null)
