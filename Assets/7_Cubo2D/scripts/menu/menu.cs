@@ -81,6 +81,10 @@ public class menu : MonoBehaviour , IMenuControlador,IMenuRespuesta{
 		SendMessage ("hide");
 	}
 
+	public void OnClickCerrarJuego() {
+		Application.Quit();
+	}
+
 	public void show(){
 		//avisa a los hermanos
 	}
