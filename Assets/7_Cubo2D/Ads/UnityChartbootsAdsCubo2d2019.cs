@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-//using ChartboostSDK;
 using UnityEngine.Advertisements;
 
-public class UnityChartbootsAdsCubo2d2019 : MonoBehaviour ,IUnityAdsListener
+public class UnityChartbootsAdsCubo2d2019 : MonoBehaviour, IUnityAdsListener
 {
     public Button VideoRecompensaButton;
     CanvasGroup CanvasGroupButton;
@@ -17,16 +14,18 @@ public class UnityChartbootsAdsCubo2d2019 : MonoBehaviour ,IUnityAdsListener
     string AndroidAppIdUnity;
     [SerializeField]
     string iOSAppIdUnity;
-    bool paz = false;
+    public static bool paz = false;
     bool MostrarAds = true;
-    int contAds = 0;
+    public static int contAds = 0;
     [SerializeField]
     GameObject RemoveAdsButton;
     [SerializeField]
-    bool Debug = false;
+    bool DebugMode = false;
     [SerializeField]
     bool TestMode = false;
     public static readonly string video = "video";
+    [SerializeField]
+    int frecuenciaAds = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +41,7 @@ public class UnityChartbootsAdsCubo2d2019 : MonoBehaviour ,IUnityAdsListener
                 RemoveAdsButton.SetActive(false);
         }
 
-        if (!MostrarAds && !Debug) {
+        if (!MostrarAds && !DebugMode) {
             //UnityEngine.Debug.Log("sin ads activado");
             return;
         }
@@ -55,59 +54,49 @@ public class UnityChartbootsAdsCubo2d2019 : MonoBehaviour ,IUnityAdsListener
         InvokeRepeating("UpdateVideoRecompensaButton", 0,0.5f);
 
 
-        //UnityEngine.Debug.Log("CanvasGroupButton ok");
+        if (Advertisement.isSupported)
+        {
+            if (!Advertisement.isInitialized)
+            {
+                InicializarAds(iOSAppIdUnity, AndroidAppIdUnity);
+            }
+            else {
+            }
+
+            Advertisement.Load(video);
+            Advertisement.Load("showInterstitial");
+            Advertisement.Load("banner");
+        }
+        else {
+            Debug.Log($"Plataforma {Application.platform} no soportada Ads para la version " + Advertisement.version);
+        }
+    }
+
+
+    public void InicializarAds(string iOSAppId,string AndroidAppId) {
+
+        Advertisement.AddListener(this);
 
 #if UNITY_IPHONE
         if (string.IsNullOrEmpty(iOSAppIdUnity))
         {
-            //Debug.Log("falta iOSAppIdUnity ");
+            Debug.Log("falta iOSAppIdUnity ");
         }
         else
         {
-
-            if (Advertisement.isSupported)
-            {
-                Advertisement.Initialize(iOSAppIdUnity);
-
-                //Debug.Log($"Initialize iOSAppIdUnity:{iOSAppIdUnity}");
-            }
-            else
-            {
-                //Debug.Log("Plataforma no soportada para " + Advertisement.version);
-            }
+            Advertisement.Initialize(iOSAppId, TestMode);
         }
 #else
-        //UnityEngine.Debug.Log("plataforma " + Application.platform.ToString());
 
         if (string.IsNullOrEmpty(AndroidAppIdUnity))
         {
-            //UnityEngine.Debug.Log("falta AndroidAppIdUnity " );
+            UnityEngine.Debug.Log("falta AndroidAppIdUnity " );
         }
-        else {
-
-            if (Advertisement.isSupported)
-            {
-
-                //UnityEngine.Debug.Log($"intento Initialize AndroidAppIdUnity:{AndroidAppIdUnity}");
-
-                Advertisement.AddListener(this);
-                Advertisement.Initialize(AndroidAppIdUnity, TestMode);
-
-                //UnityEngine.Debug.Log($"Initialize AndroidAppIdUnity:{AndroidAppIdUnity} ok");
-            }
-            else {
-                //UnityEngine.Debug.Log("Plataforma no soportada para " + Advertisement.version);
-            }
+        else
+        {
+            Advertisement.Initialize(AndroidAppId, TestMode);
         }
 #endif
-
-
-        //UnityEngine.Debug.Log($"loads");
-
-        Advertisement.Load(video);
-        Advertisement.Load("showInterstitial");
-        Advertisement.Load("banner");
-
     }
 
     // Update is called once per frame
@@ -124,13 +113,13 @@ public class UnityChartbootsAdsCubo2d2019 : MonoBehaviour ,IUnityAdsListener
     public void showInterstitial()
     {
         //UnityEngine.Debug.Log("showInterstitial");
-        if (paz||(!MostrarAds && !Debug))
+        if (paz||(!MostrarAds && !DebugMode))
         {
             return;
         }
         
-        if (Advertisement.IsReady("video") && !(contAds%3==0)) {
-            Advertisement.Show("video");
+        if (Advertisement.IsReady(video) &&(frecuenciaAds == 0 ||!(contAds % frecuenciaAds == 0))) {
+            Advertisement.Show(video);
             paz = true;
             Invoke("DesactivarPaz", PazDuracion);
         }
@@ -149,7 +138,7 @@ public class UnityChartbootsAdsCubo2d2019 : MonoBehaviour ,IUnityAdsListener
             }*/
 
             //if (Advertisement.IsReady("video"))
-            Advertisement.Load("video");
+            Advertisement.Load(video);
 
         }
 
@@ -239,7 +228,7 @@ public class UnityChartbootsAdsCubo2d2019 : MonoBehaviour ,IUnityAdsListener
 
     public void showBanner()
     {
-        if (!MostrarAds && !Debug) {
+        if (!MostrarAds && !DebugMode) {
             return;
         }
 
