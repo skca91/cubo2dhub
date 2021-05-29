@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CanvasGroup))]
 
-public class menuV2 : MonoBehaviour
+public class menuV2 : MonoBehaviour, IMenuControlador, IMenuRespuesta
 {
     bool Open = false;
     [SerializeField]
@@ -48,5 +49,21 @@ public class menuV2 : MonoBehaviour
 
     public void hideMenu() {
         this.gameObject.SetActive(false);
+    }
+
+    [Obsolete("showMenu no se recomienda con menuV2 use set active directamente en el gameobject")]
+    public void showMenu()
+    {
+        this.gameObject.SetActive(true);
+    }
+
+    public void show()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void hide()
+    {
+        throw new System.NotImplementedException();
     }
 }
