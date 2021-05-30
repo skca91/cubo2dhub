@@ -34,13 +34,13 @@ public class FirebaseLoginBackEnd : MonoBehaviour, IFirebaseLoginBackEnd {
     [SerializeField]
     menu NoInternetMenu;
     [SerializeField]
-    menu LoginErrorMenu;
+    GameObject LoginErrorMenuGO;
     [SerializeField]
     Text ErrorText;
     [SerializeField]
     InputField ResetPasswordInputField;
     [SerializeField]
-    menu ResetPasswordMenu;
+    GameObject ResetPasswordMenu;
     [SerializeField]
     FirebaseWebAuthUserCubo2dView MenuFirebase;
 
@@ -54,10 +54,15 @@ public class FirebaseLoginBackEnd : MonoBehaviour, IFirebaseLoginBackEnd {
     FirebaseUser user;
     Firebase.DependencyStatus dependencyStatus = Firebase.DependencyStatus.UnavailableOther;
     */
+    IMenuControlador LoginErrorMenu;
+
     string Token = "";
     FirebaseWebAuthUserCubo2d user;
     // Use this for initialization
     void Start() {
+
+        LoginErrorMenu = LoginErrorMenuGO.GetComponent<IMenuControlador>();
+
 
         InitializeFirebase();
 
@@ -146,10 +151,6 @@ public class FirebaseLoginBackEnd : MonoBehaviour, IFirebaseLoginBackEnd {
              return;
          }*/
         /*
-        //var GOOGLE_ID_TOKEN = "Ac7LnXtKWCaNiK1M2zreq8XH7G72";
-        var GOOGLE_ID_TOKEN = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjYxMDgzMDRiYWRmNDc1MWIyMWUwNDQwNTQyMDZhNDFkOGZmMWNiYTgiLCJ0eXAiOiJKV1QifQ.eyJwcm92aWRlcl9pZCI6ImFub255bW91cyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9sb2dpbi1hcHAtNWFhNTUiLCJhdWQiOiJsb2dpbi1hcHAtNWFhNTUiLCJhdXRoX3RpbWUiOjE2MTMzNTg3NTQsInVzZXJfaWQiOiJRNUJadGlTaWY2YlZ4YUdHVVc5b0FLWndLcmEyIiwic3ViIjoiUTVCWnRpU2lmNmJWeGFHR1VXOW9BS1p3S3JhMiIsImlhdCI6MTYxMzM1ODc1NCwiZXhwIjoxNjEzMzYyMzU0LCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7fSwic2lnbl9pbl9wcm92aWRlciI6ImFub255bW91cyJ9fQ.htkho91ewMsk-AAREbxPb2ATqRp0-dZsdFKGavoHfQCqHM8UYFA1Wf8iX5eBrLsao18koDJR8kOLOTANHqx7jkopK1ZmhS3KaHz5eAF465RR9zQx3E8NWEaMuj8z-QnZtFnEdWkFDYQ1ouB-tvcr5LeGhMq8SYtVhtJIkCm66eWSshVl0hqFzY6DimEbwQGvkjlFxBQ9TvBP4zbXFuCMnaNcpo_bRZ9ESZEuwxdxoXnqCj17JgBiFfnjqdY3xjo7_Hv1a5qQB7pq5GyKMyQ97o3hLNGnJo9i-bimg681ithLMFK2TjlGzYVPUCoiBsiTs3x8AR3sw_xGVgclZ7cUvA";
-        //var payLoad = "{\"token\":\""+ GOOGLE_ID_TOKEN +"\",\"returnSecureToken\":true}";
-        var payLoad = "{\"postBody\":\"id_token ="+ GOOGLE_ID_TOKEN + "&providerId=google.com\",\"requestUri\":\"http://localhost\",\"returnIdpCredential\":true,\"returnSecureToken\":true}";
 
         RestClient.Post($"https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key={WebApiKey}",
             payLoad).Then(response => {
@@ -182,7 +183,7 @@ public class FirebaseLoginBackEnd : MonoBehaviour, IFirebaseLoginBackEnd {
     public void IniciarSession() {
 
         //UsuarioInputField.text = $"daniel532@cubo2d.com";
-        //PasswordInputField.text = "prenoirbo";
+        //PasswordInputField.text = "123456";
 
         email = UsuarioInputField.text;
         password = PasswordInputField.text;
@@ -321,13 +322,15 @@ public class FirebaseLoginBackEnd : MonoBehaviour, IFirebaseLoginBackEnd {
 
     public void Registro() {
 
-        //UsuarioRegistroInputField.text = $"danielp299@cubo2d.com";
+        //UsuarioRegistroInputField.text = $"test@cubo2d.com";
         //PasswordRegistroInputField.text = "123456";
 
         email = UsuarioRegistroInputField.text;
         password = PasswordRegistroInputField.text;
+        string nombre = (string.IsNullOrEmpty(NombreInputField?.text) ? "Usuario" : NombreInputField?.text);
+        string apellido = (string.IsNullOrEmpty(ApellidoInputField?.text) ? $"{Random.Range(0, 9999999).ToString("00000")}" : ApellidoInputField?.text);
 
-        if (NombreInputField.text.Length < 2 || NombreInputField.text.Length < 2) {
+        if (NombreInputField?.text.Length < 2 || ApellidoInputField?.text.Length < 2) {
             ErrorText.text = "Falta nombre y apellido";
             LoginErrorMenu.showMenu();
             return;
@@ -339,10 +342,9 @@ public class FirebaseLoginBackEnd : MonoBehaviour, IFirebaseLoginBackEnd {
             LoginErrorMenu.showMenu();
             return;
         }
-        string DisplayName= NombreInputField.text + " " +ApellidoInputField.text;
-        // Debug.Log("payload: " + email + " " + password);
+        string DisplayName= $"{ nombre }-{apellido}";
+
         var payLoad = $"{{\"displayName\":\"{DisplayName}\",\"email\":\"{email}\",\"password\":\"{password}\",\"returnSecureToken\":true}}";
-        //var payLoad = $"{{\"returnSecureToken\":true}}";
         RestClient.Post($"https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key={WebApiKey}",
             payLoad).Then(response => {
 
@@ -436,7 +438,7 @@ public class FirebaseLoginBackEnd : MonoBehaviour, IFirebaseLoginBackEnd {
     //Para los hermanos
     public void VerificarIdFirebase(string Token)
     {
-        
+        Debug.Log("Token:\n"+Token);
         //throw new NotImplementedException();
     }
 
