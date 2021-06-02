@@ -439,6 +439,7 @@ public class FirebaseLoginBackEnd : MonoBehaviour, IFirebaseLoginBackEnd {
     public void VerificarIdFirebase(string Token)
     {
         Debug.Log("Token:\n"+Token);
+        RestClient.DefaultRequestHeaders["Authorization"] = Token;
         //throw new NotImplementedException();
     }
 
