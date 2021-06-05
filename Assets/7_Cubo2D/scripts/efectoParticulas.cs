@@ -26,6 +26,11 @@ public class efectoParticulas : MonoBehaviour {
 	}
 
 	public void sensorImpulsoID(int _id){
+		if (v_particulas is null)
+		{
+			return;
+		}
+
 		if (v_id != -1) {
 			if(v_id == _id){
 				activarEfectoEnModo (v_modo);
@@ -37,7 +42,12 @@ public class efectoParticulas : MonoBehaviour {
 	}
 
 	public void activarEfectoEnModo( modo _modo){
-		if(_modo == modo.activar){
+		if (v_particulas is null)
+		{
+			return;
+		}
+
+		if (_modo == modo.activar){
 			activarEfecto ();
 		}else if(_modo == modo.desactivar){
 			desactivarEfecto ();
@@ -51,6 +61,10 @@ public class efectoParticulas : MonoBehaviour {
 	}
 
 	public void activarEfecto(int _id){
+		if (v_particulas is null) {
+			return;
+		}
+
 		if (_id == v_id) {
 			if (!v_particulas.isPlaying || sePuedeInterrumpir) {
 				v_particulas.Play();
@@ -59,6 +73,11 @@ public class efectoParticulas : MonoBehaviour {
 	}
 
 	public void desactivarEfecto(int _id){
+		if (v_particulas is null)
+		{
+			return;
+		}
+
 		if (_id == v_id) {
 			if (!v_particulas.isPlaying || sePuedeInterrumpir) {
 				v_particulas.Stop();
@@ -67,12 +86,21 @@ public class efectoParticulas : MonoBehaviour {
 	}
 
 	public void activarEfecto(){
+		if (v_particulas is null)
+		{
+			return;
+		}
 		if (!v_particulas.isPlaying) {
 			v_particulas.Play();
 		}
 	}
 
 	public void desactivarEfecto(){
+		if (v_particulas is null)
+		{
+			return;
+		}
+
 		if (v_particulas.isPlaying) {
 			v_particulas.Stop();
 		}
