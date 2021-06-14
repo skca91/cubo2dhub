@@ -8,15 +8,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 0}
+  m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1390441196657544}
-  m_IsPrefabAsset: 1
+  m_IsPrefabParent: 1
 --- !u!1 &1326503004374070
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
+  serializedVersion: 5
   m_Component:
   - component: {fileID: 224544318415635642}
   - component: {fileID: 114945914776354866}
@@ -30,9 +30,9 @@ GameObject:
 --- !u!1 &1390441196657544
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
+  serializedVersion: 5
   m_Component:
   - component: {fileID: 4813487375635994}
   m_Layer: 0
@@ -45,7 +45,7 @@ GameObject:
 --- !u!4 &4813487375635994
 Transform:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1390441196657544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -59,7 +59,7 @@ Transform:
 --- !u!114 &114945914776354866
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1326503004374070}
   m_Enabled: 1
@@ -70,15 +70,14 @@ MonoBehaviour:
   audioGroupSfxButton: {fileID: 243030065208754024, guid: 52162e388b8584c0fa394502542fe702,
     type: 2}
   audioGroupSfxEfectos: {fileID: 0}
-  audioGroupMusicaFondo: {fileID: 0}
   clipBoton:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 9bed3fbe4f68240e19f21e307c1b2de3, type: 3}
   clipMusicaFondo: []
   clipMusicaFondoExtra: []
 --- !u!224 &224544318415635642
 RectTransform:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1326503004374070}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}

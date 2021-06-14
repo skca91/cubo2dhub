@@ -180,10 +180,14 @@ public class FirebaseLoginBackEnd : MonoBehaviour, IFirebaseLoginBackEnd {
             });*/
     }
 
+
+    public void OnClickSetCredenciales() {
+        UsuarioInputField.text = $"test2021@cubo2d.com";
+        PasswordInputField.text = "123456";
+    }
     public void IniciarSession() {
 
-        //UsuarioInputField.text = $"daniel532@cubo2d.com";
-        //PasswordInputField.text = "123456";
+        
 
         email = UsuarioInputField.text;
         password = PasswordInputField.text;
@@ -516,7 +520,7 @@ public class FirebaseLoginBackEnd : MonoBehaviour, IFirebaseLoginBackEnd {
 
         PlayerPrefs.SetString("UserEmail", "");
         PlayerPrefs.SetString("localId", "");
-        MenuFirebase.setFirebaseWebAuthUserCubo2d(user);
+        MenuFirebase?.setFirebaseWebAuthUserCubo2d(user);
     }
 
 
