@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemSpawnV2 : MonoBehaviour {
+public class ItemSpawnV2 : MonoBehaviour, ItemSpawnI
+{
 
     public string Id;
 	// Use this for initialization
@@ -14,4 +15,8 @@ public class ItemSpawnV2 : MonoBehaviour {
 	void Update () {
 		
 	}
+}
+
+public interface ItemSpawnI {
+
 }

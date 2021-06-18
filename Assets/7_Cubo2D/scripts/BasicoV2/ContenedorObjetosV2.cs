@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ContenedorObjetosV2 : MonoBehaviour {
+public class ContenedorObjetosV2 : MonoBehaviour, ContenedorObjetosI
+{
 
     public ItemSpawnV2[] Objetos;
 	// Use this for initialization
@@ -15,7 +16,7 @@ public class ContenedorObjetosV2 : MonoBehaviour {
 		
 	}
 
-    public GameObject BuscarID(string _Id) {
+    public virtual GameObject BuscarID(string _Id) {
         Debug.Log("Busco: (" + _Id + ")" );
 
         foreach (ItemSpawnV2 GO in Objetos)
@@ -30,4 +31,8 @@ public class ContenedorObjetosV2 : MonoBehaviour {
     }
 
 
+}
+
+public interface ContenedorObjetosI {
+    GameObject BuscarID(string _Id);
 }
