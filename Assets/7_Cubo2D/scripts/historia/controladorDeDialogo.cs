@@ -85,7 +85,7 @@ public class controladorDeDialogo : MonoBehaviour {
 			//Debug.Log ("texto dialogo: "+ t.dialogo);
 			if(conTexto == TextoActual){
                 //idiomaV2.textoTraducido (t.dialogo);
-                string NombrePersonaje = t.personaje.Equals("nombrejugador") ? NombrePersonaje = "<color=#0010FF>" + NombreJugador + ":</color> " : "<color=#FFFF00>" + idiomaV2.textoTraducidoMayusculas(t.personaje)+ ":</color> ";
+                string NombrePersonaje = t.personaje.Equals("nombrejugador") ? NombrePersonaje = "<color=#0010FF>" + NombreJugador + ":</color> " : "<color=#FFFF00>" + idiomaV2.textoTraducido(t.personaje).ToUpper()+ ":</color> ";
 
                 dialogo.text = NombrePersonaje + idiomaV2.textoTraducido( t.dialogo);
 				personaje.cargarPersonaje (t.personaje,t.expresion);
