@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class contenedorDeObjetos : MonoBehaviour {
+
+[Obsolete("Remplazado por ContenedorObjetosV2, se actualizo para funcionar como adapter, se eliminara en el futuro")]
+public class contenedorDeObjetos : ContenedorObjetosV2, ContenedorObjetosI {
 
 	public itemSpawn[] objetos;
 	// Use this for initialization
 	void Start () {
-	//	objetos = GetComponentsInChildren<itemSpawn> ();
+		//	objetos = GetComponentsInChildren<itemSpawn> ();
+		
 	}
 	
 	// Update is called once per frame
@@ -50,4 +54,17 @@ public class contenedorDeObjetos : MonoBehaviour {
 		}
 		return null;
 	}
+
+    public override GameObject BuscarID(string _Id)
+    {
+		int Id = 0;
+		if (int.TryParse(_Id, out Id))
+		{
+			return buscarPorID(Id);
+		}
+		else {
+			return null;
+		}
+
+    }
 }
