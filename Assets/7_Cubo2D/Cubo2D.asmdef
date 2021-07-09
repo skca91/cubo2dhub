@@ -8,7 +8,8 @@
         "Proyecto26",
         "Purchasing.Common",
         "UnityEngine.Purchasing.Apple",
-        "UnityEngine.Purchasing.Stores"
+        "UnityEngine.Purchasing.Stores",
+        "Unity.Advertisement.IosSupport"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
