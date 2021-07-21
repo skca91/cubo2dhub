@@ -31,5 +31,27 @@ public class AdsTrakingTerminosYCondiciones : MonoBehaviour
         
     }
 
-    //public void OnClickAceptar
+    /// <summary>
+    /// Solo para california
+    /// </summary>
+    public void OnClickAceptarGDPR() {
+        MetaData privacyMetaData = new MetaData("gdpr");
+        privacyMetaData.Set("consent", "true");
+        Advertisement.SetMetaData(privacyMetaData);
+    }
+
+    public void OnClickAceptarPrivacity()
+    {
+        MetaData privacyMetaData = new MetaData("privacy");
+        privacyMetaData.Set("consent", "true");
+        Advertisement.SetMetaData(privacyMetaData);
+    }
+
+    public void OnClickAceptarCCPA()
+    {
+
+        MetaData ageGateMetaData = new MetaData("privacy");
+        ageGateMetaData.Set("useroveragelimit", "true");
+        Advertisement.SetMetaData(ageGateMetaData);
+    }
 }
