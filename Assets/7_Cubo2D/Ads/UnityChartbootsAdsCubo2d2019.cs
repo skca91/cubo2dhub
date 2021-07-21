@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
+#if UNITY_IOS
+// Include the IosSupport namespace if running on iOS:
+using Unity.Advertisement.IosSupport;
+#endif
+
 
 public class UnityChartbootsAdsCubo2d2019 : MonoBehaviour, IUnityAdsListener
 {
@@ -84,6 +89,13 @@ public class UnityChartbootsAdsCubo2d2019 : MonoBehaviour, IUnityAdsListener
         }
         else
         {
+            // Check the user's consent status.
+            // If the status is undetermined, display the request request: 
+            if (ATTrackingStatusBinding.GetAuthorizationTrackingStatus() == ATTrackingStatusBinding.AuthorizationTrackingStatus.NOT_DETERMINED)
+            {
+                ATTrackingStatusBinding.RequestAuthorizationTracking();
+            }
+
             Advertisement.Initialize(iOSAppId, TestMode);
         }
 #else
