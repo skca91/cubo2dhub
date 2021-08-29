@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PuntoDeMontajeV2 : MonoBehaviour , PuntoDeMontajeI
+public class PuntoDeMontajeV2 : MonoBehaviour , IPuntoDeMontaje
 {
 
     public ContenedorObjetosV2 contenedor;
@@ -46,7 +46,7 @@ public class PuntoDeMontajeV2 : MonoBehaviour , PuntoDeMontajeI
     }
 }
 
-public interface PuntoDeMontajeI {
+public interface IPuntoDeMontaje {
 
     void montar(string id);
 

@@ -6,7 +6,9 @@ using UnityEngine.Advertisements;
 using Unity.Advertisement.IosSupport;
 #endif
 
-
+/// <summary>
+/// Se recomienda implementar IAdsCubo2d
+/// </summary>
 public class UnityChartbootsAdsCubo2d2019 : MonoBehaviour, IUnityAdsListener
 {
     public Button VideoRecompensaButton;
@@ -294,4 +296,10 @@ public class UnityChartbootsAdsCubo2d2019 : MonoBehaviour, IUnityAdsListener
             HandleShowResult(showResult);
         }
     }
+
+}
+
+public interface IAdsCubo2d {
+
+    void videoRecompensaCompleto(string recompensa);
 }

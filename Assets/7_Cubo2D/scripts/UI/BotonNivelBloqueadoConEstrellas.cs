@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Se recomienda implementar IBotonNivelBloqueadoConEstrellas
+/// </summary>
 [RequireComponent(typeof(Button))]
-
 public class BotonNivelBloqueadoConEstrellas : MonoBehaviour {
 
     public string Id;
@@ -15,6 +17,7 @@ public class BotonNivelBloqueadoConEstrellas : MonoBehaviour {
     [SerializeField]
     Image[] EstrellaImagen;
     public GameObject Duenio;
+    IBotonNivelBloqueadoConEstrellas DuenioInterfaz;
     Button boton;
 
 
@@ -22,7 +25,8 @@ public class BotonNivelBloqueadoConEstrellas : MonoBehaviour {
 	void Start () {
         boton = GetComponent<Button>();
         boton.onClick.AddListener(OnClick);
-	}
+        DuenioInterfaz = Duenio.GetComponent<IBotonNivelBloqueadoConEstrellas>();
+    }
 	
     /*
 	// Update is called once per frame
@@ -33,7 +37,13 @@ public class BotonNivelBloqueadoConEstrellas : MonoBehaviour {
     public void OnClick(){
         Debug.Log("on click click");
         if(!BloqueadoImagen.gameObject.activeSelf){
-            Duenio.SendMessage("OnClickBotonNivelBloqueadoConEstrellas", Id);
+            if (DuenioInterfaz != null)
+            {
+                DuenioInterfaz.OnClickBotonNivelBloqueadoConEstrellas(Id);
+            }
+            else {
+                Duenio.SendMessage("OnClickBotonNivelBloqueadoConEstrellas", Id);
+            }
         }
         else{
             Debug.Log("bloqueado " + Id);
@@ -43,10 +53,10 @@ public class BotonNivelBloqueadoConEstrellas : MonoBehaviour {
 
     public void Bloqueado(string _EstaBloqueado){
 
-        if(_EstaBloqueado.Equals("si")){
-            BloqueadoImagen.gameObject.SetActive(true);
+        if(_EstaBloqueado.ToLower().Equals("si")){
+            BloqueadoImagen?.gameObject.SetActive(true);
         }else{
-            BloqueadoImagen.gameObject.SetActive(false);
+            BloqueadoImagen?.gameObject.SetActive(false);
         }
     }
 
@@ -68,12 +78,17 @@ public class BotonNivelBloqueadoConEstrellas : MonoBehaviour {
             i.color = _NuevoColor;
         }
     }
-
+    /// <summary>
+    /// Texto que se muestra en el boton
+    /// </summary>
     public string Etiqueta{
         set { EtiquetaText.text = value; }
     }
 }
 
+public interface IBotonNivelBloqueadoConEstrellas {
+    void OnClickBotonNivelBloqueadoConEstrellas(string Id);
+}
 
 public class NivelBloqueadoEstrellas{
 

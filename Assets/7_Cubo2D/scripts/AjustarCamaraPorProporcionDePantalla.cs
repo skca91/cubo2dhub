@@ -12,20 +12,29 @@ public class AjustarCamaraPorProporcionDePantalla : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField]
     Vector3 DistanciaDeCamara = new Vector3(0, 0, -35);
-    
+    [SerializeField]
+    Vector3 DistanciaDeCamaraBase = new Vector3(0, 0, -25);
     Camera camera;
 
     void Start()
     {
-        if(Screen.height > Screen.width* 1.8f) {
-            this.transform.position = new Vector3(0,0,-35);
-
-        }
+        InvokeRepeating("AjustarCamaraPorProporcionDePantallaEnTiempoReal",1,1);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void AjustarCamaraPorProporcionDePantallaEnTiempoReal() {
+        if (Screen.height > Screen.width * 1.8f)
+        {
+            this.transform.position = DistanciaDeCamara;
+        }
+        else
+        {
+            this.transform.position = DistanciaDeCamaraBase;
+        }
     }
 }

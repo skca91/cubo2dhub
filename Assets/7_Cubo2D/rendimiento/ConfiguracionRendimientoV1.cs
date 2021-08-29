@@ -9,6 +9,8 @@ public class ConfiguracionRendimientoV1 : MonoBehaviour
     [SerializeField]
     public Text fps;
     int cont,cont2;
+    [SerializeField]
+    float DuracionMaxFPS = 3.0f;
 
     void Start()
     {
@@ -46,7 +48,7 @@ public class ConfiguracionRendimientoV1 : MonoBehaviour
     public void MaxFPS() {
         Application.targetFrameRate = 60;
         CancelInvoke("MinFPS");
-        Invoke("MinFPS", 2);
+        Invoke("MinFPS", DuracionMaxFPS);
     //   Debug.Log("MaxFPS");
     }
 }
